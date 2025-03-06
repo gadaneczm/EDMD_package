@@ -1,9 +1,9 @@
 # Ensembe-Driven Molecular Dynamics
 This module can be used to analyse the Phi and Psi dihedral (or torsion) angle distribution in a protein structural ensemble (e.g., from Chemical-Shift-Rosetta), define potential energy functions (PEFs), and replace the original dihedral energy terms in GROMACS for molecular dynamics (MD) simulations.
 
-1. Set up the system for the simulation from the very best structure in the ensemble. 
+1. Set up the system for the MD simulation from the very best structure in the ensemble. 
 
-2. Set your configuration in the "config.json" file.
+2. Set your configuration in the "EDMD_config.json" file.
 
 3. Run the main.py, where you can add the JSON file by the -c, or --config flag. This is a pipeline to run "save_dihedrals.py", "fit_dihedrals.py" and "create_tables.py". Optionally it can also call "visualize_dihedrals.py" and  "visualize_pef.py" if "VISUALIZE": True in the JSON.
 
