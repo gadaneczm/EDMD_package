@@ -1,0 +1,10 @@
+{
+  "ROSETTA_RESULTS_FOLDER": "/rhome/PROTMOD/gadaneczm/Rosetta/run_abrelax/fbp/run/analysis",
+  "GMX_FOLDER": "/rhome/PROTMOD/gadaneczm/ebMD_processing/data/fbp/fbp-fmn_abrelax",
+  "RESI_IDX_SHIFT": 0,
+  "VISUALIZE": "True",
+  "SCORE_SCALE": 10.0,
+  "TEMPERATURE": 310.0,
+  "GRO_FILENAME": "fbp-fmn.solv.ions.gro",
+  "TOP_FILENAME": "fbp-fmn.full.top"
+}

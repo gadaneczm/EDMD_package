@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "example_package_YOUR_USERNAME_HERE"
+version = "0.0.2"
+authors = [
+  { name="Márton Gadanecz", email="marton.gadanecz@gmail.com" },
+  { name="Zsolt Fazekas", email="zsolt.fazekas.9@gmail.com" }
+]
+description="This modul can be used to analyse the Phi and Psi dihedral (or torsion) angle distribution in a protein structural ensemble (e.g. from Chemical-Shift-Rosetta), define potential energy functions (PEFs), and exchange them for the original dihedral energy terms in GROMACS for a molecular dynamics (MD) simulation."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "biopython",
+    "matplotlib",
+    "numpy"
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICENSE"]
+
+[project.urls]
+Homepage = "https://github.com/gadaneczm/example_package_YOUR_USERNAME_HERE"
