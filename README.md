@@ -19,10 +19,17 @@ visualize_pef.py: You can look at the angle distributions and the PEFs in case o
 
 # EDMD_config.json file
 ROSETTA_RESULTS_FOLDER: (string) Path of the directory containing the ExtractedPDBs folder with the individual PDB files of the ensemble and a "name.scores.txt" containing model names and Rosetta-scores.
+
 GMX_FOLDER: (string) Path of the folder, where you want to run the MD simulation with the modified force field and where you have your TOP and GRO files.
+
 RESI_IDX_SHIFT: (int) Shift the residue numbering (if it was e.g. trimmed).
+
 VISUALIZE: (bool) Set True, if you want to run the visualize_dihedrals.py and visualize_pef.py scripts as well.
+
 SCORE_SCALE: (float) Set to scale the Rosetta-score for weighting during the PEF definition.
+
 TEMPERATURE: (float) Temperature of your simulation in Kelvin. Needed for the Boltzman-inversion during the PEF definition.
+
 GRO_FILENAME: (string) Name of your GRO file.
+
 TOP_FILENAME: (string) Name of you processed TOP file (created e.g. by gmx grompp -pp flag in gromacs).
