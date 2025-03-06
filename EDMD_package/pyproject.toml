@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "EnsembleDrivenMolecularDynamics"
+version = "0.0.2"
+authors = [
+  { name="Márton Gadanecz", email="marton.gadanecz@gmail.com" },
+  { name="Zsolt Fazekas", email="zsolt.fazekas.9@gmail.com" }
+]
+description="This module can be used to analyse the Phi and Psi dihedral (or torsion) angle distribution in a protein structural ensemble (e.g., from Chemical-Shift-Rosetta), define potential energy functions (PEFs), and replace the original dihedral energy terms in GROMACS for molecular dynamics (MD) simulations."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "biopython",
+    "matplotlib",
+    "numpy"
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICENSE"]
+
+[project.urls]
+Homepage = "https://github.com/gadaneczm/EDMD_package"
