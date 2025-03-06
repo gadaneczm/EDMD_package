@@ -1,4 +1,4 @@
-# NEW_NAME
+# Ensembe-Driven Molecular Dynamics
 This modul can be used to analyse the Phi and Psi dihedral (or torsion) angle distribution in a protein structural ensemble (e.g. from Chemical-Shift-Rosetta), and to define potential energy functions (PEFs), to exchange them for the original torsional energy terms in GROMACS for a molecular dynamics (MD) simulation.
 
 
