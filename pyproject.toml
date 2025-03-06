@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "EDMD_package"
-version = "2.0.0"
+version = "2.0.1"
 authors = [
   { name="Márton Gadanecz", email="marton.gadanecz@gmail.com" },
   { name="Zsolt Fazekas", email="zsolt.fazekas.9@gmail.com" }
@@ -13,9 +13,9 @@ description="This module can be used to analyse the Phi and Psi dihedral (or tor
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "biopython",
-    "matplotlib",
-    "numpy"
+    "biopython~=1.81",
+    "matplotlib~=3.7.1",
+    "numpy~=1.24.3"
 ]
 classifiers = [
     "Programming Language :: Python :: 3",

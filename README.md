@@ -11,7 +11,7 @@ save_dihedrals.py: The dihedral angles in your ensemble will be measured and sav
 
 fit_dihedrals.py: The probability density functions (PDF) will be defined for each backbone dihedral angle, according to the dihedral angle distributions using kernel density estimation. Finally, the PEFs will be created.
 
-create_tables.py: You need to have a ".gro" file and a ".top" file about your solvated system. By running the "create_tables.py" you will get a ".new.top" file, which you should use as a topology file for your GROMACS MD simulation.
+create_tables.py: You need to have a ".gro" file and a ".top" file about your solvated system. By running this script you will get a ".new.top" file, which you should use as a topology file for your GROMACS MD simulation.
 
 visualize_dihedrals.py: Optionally, you can prepare figures about the dihedral angle distribution for every residue.
 
