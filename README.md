@@ -1,4 +1,4 @@
-# Ensembe-Driven Molecular Dynamics
+# Ensembe-Driven Molecular Dynamics (EDMD)
 This module can be used to analyse the Phi and Psi dihedral (or torsion) angle distribution in a protein structural ensemble (e.g., from Chemical-Shift-Rosetta), define potential energy functions (PEFs), and replace the original dihedral energy terms in GROMACS for molecular dynamics (MD) simulations.
 
 1. Set up the system for the MD simulation from the very best structure in the ensemble. 
