@@ -17,3 +17,5 @@ visualize_dihedrals.py: Optionally, you can prepare figures about the dihedral a
 
 visualize_pef.py: You can look at the angle distributions and the PEFs in case of each residue.
 
+# EDMD_config.json file
+ROSETTA_RESULTS_FOLDER: (string) Path of the directory containing the ExtractedPDBs folder with the individual PDB files of the ensemble and a "name.scores.txt" containing model names and Rosetta-scores.
