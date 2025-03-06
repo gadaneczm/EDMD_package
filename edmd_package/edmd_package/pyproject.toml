@@ -9,7 +9,7 @@ authors = [
   { name="Márton Gadanecz", email="marton.gadanecz@gmail.com" },
   { name="Zsolt Fazekas", email="zsolt.fazekas.9@gmail.com" }
 ]
-description="This modul can be used to analyse the Phi and Psi dihedral (or torsion) angle distribution in a protein structural ensemble (e.g. from Chemical-Shift-Rosetta), define potential energy functions (PEFs), and exchange them for the original dihedral energy terms in GROMACS for a molecular dynamics (MD) simulation."
+description="This module can be used to analyse the Phi and Psi dihedral (or torsion) angle distribution in a protein structural ensemble (e.g., from Chemical-Shift-Rosetta), define potential energy functions (PEFs), and replace the original dihedral energy terms in GROMACS for molecular dynamics (MD) simulations."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
