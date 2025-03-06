@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "example_package_YOUR_USERNAME_HERE"
+name = "EnsembleDrivenMolecularDynamics"
 version = "0.0.2"
 authors = [
   { name="Márton Gadanecz", email="marton.gadanecz@gmail.com" },
@@ -25,4 +25,4 @@ license = "MIT"
 license-files = ["LICENSE"]
 
 [project.urls]
-Homepage = "https://github.com/gadaneczm/example_package_YOUR_USERNAME_HERE"
+Homepage = "https://github.com/gadaneczm/EDMD_package"

@@ -22,7 +22,7 @@ def main():
     print("\nformat_scores_csrosetta.py is running:")
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-c", "--config", type=Path, default=Path("ebMD_config.json"),
+    parser.add_argument("-c", "--config", type=Path, default=Path("EDMD_config.json"),
                         help="A path pointing to an ebMD CONFIGURATION json file.")
 
     args = parser.parse_args()
