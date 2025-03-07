@@ -38,6 +38,18 @@ Install the EDMD_package:
 python3 -m pip install EDMD_package
 ```
 
+## How ro use?
+If you have set the EDMD_config.json , you can simply call:
+```bash
+python3 -m EDMD_package -c {path_to_JSON}
+```
+
+You can also call induvidual scripts:
+```bash
+pathon3 -m EDMD_package -c {path_to_JSON} -fn {name_of_script}
+```
+
+
 ## Individual scripts
 `save_dihedrals.py` The dihedral angles in your ensemble will be measured and saved to a pickle.
 

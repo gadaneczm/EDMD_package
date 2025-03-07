@@ -103,8 +103,8 @@ def main(config_path: Path):
 
     # Access global variables
     rosetta_results_folder: Path = Path(config.get("ROSETTA_RESULTS_FOLDER"))
-    score_scale: float = config.get("score_scale")
-    temperature: float = config.get("temperature")
+    score_scale: float = config.get("SCORE_SCALE")
+    temperature: float = config.get("TEMPERATURE")
 
     # Read in the dihedral data from a pickle
     with open(rosetta_results_folder / f"angles_csr.pickle", "rb") as f:

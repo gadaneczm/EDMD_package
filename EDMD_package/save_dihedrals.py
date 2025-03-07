@@ -39,9 +39,6 @@ def get_filenames(rosetta_folder: Path):
     scores_data = list(map(lambda x: (x[0], float(x[1])), scores_data))
     scores_data.sort(key=lambda x: x[1])
 
-    print(f"First 3 file elements: {scores_data[:3]}")
-    print(f"Last 3 file elements: {scores_data[-3:]}")
-
     file_names = list(map(lambda x: f"{x[0]}.pdb", scores_data))
     scores = list(map(lambda x: x[1], scores_data))
 
