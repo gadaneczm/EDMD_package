@@ -239,5 +239,5 @@ def main(config_path: Path):
 
     # Copy the necessary files to a "for_gmx" folder
     shutil.copy(gmx_folder / gro_filename, gmx_folder / "for_gmx" / gro_filename)
-    shutil.copy(gmx_folder / "../../../gromacs_processing/edmd/EDMD_config.py",
+    shutil.copy(gmx_folder / f"{config_path}",
                 gmx_folder / f"{out_folder}/EDMD_config.py")

@@ -7,7 +7,8 @@ and replace the original dihedral energy terms in GROMACS for molecular dynamics
 
 2. Set your configuration in the "EDMD_config.json" file.
 
-3. Run the main.py, where you can add the JSON file by the -c, or --config flag. This is a pipeline to run "save_dihedrals.py", "fit_dihedrals.py" and "create_tables.py". Optionally it can also call "visualize_dihedrals.py" and  "visualize_pef.py" if "VISUALIZE": True in the JSON.
+3. Run the EDMD modul. This is a pipeline to run "save_dihedrals.py", "fit_dihedrals.py" and "create_tables.py". 
+Optionally it can also call "visualize_dihedrals.py" and  "visualize_pef.py" if "VISUALIZE": True in the JSON.
 
 ## How to install?
 Start by updating the pip version:
@@ -23,7 +24,7 @@ python3 -m pip install EDMD_package
 ## EDMD_config.json file
 - `ROSETTA_RESULTS_FOLDER: str` Path of the directory containing the ExtractedPDBs folder with the individual PDB files of the ensemble and a "name.scores.txt" containing model names and Rosetta-scores.
 
-- `GMX_FOLDER: str` Path of the folder, where you want to run the MD simulation with the modified force field and where you have your TOP and GRO files.
+- `GMX_FOLDER: str` Path of the folder, where you have your GRO and processed TOP files.
 
 - `RESI_IDX_SHIFT: int` Shift the residue numbering (if it was e.g. trimmed).
 
@@ -33,7 +34,7 @@ python3 -m pip install EDMD_package
 
 - `TEMPERATURE: float or int` Temperature of your simulation in Kelvin. Needed for the Boltzmann-inversion during the PEF definition.
 
-- `GRO_FILENAME: str` Name of your GRO file, which is ready to run the simulation, so is solvated, etc.
+- `GRO_FILENAME: str` Name of your GRO file, which is ready for the simulation, so is solvated, etc.
 
 - `TOP_FILENAME: str` Name of you processed TOP file (created e.g. by `gmx grompp -pp` flag in gromacs).
 
@@ -43,7 +44,7 @@ If you have set the EDMD_config.json , you can simply call:
 python3 -m EDMD_package -c {path_to_JSON}
 ```
 
-You can also call induvidual scripts:
+You can also call individual scripts:
 ```bash
 pathon3 -m EDMD_package -c {path_to_JSON} -fn {name_of_script}
 ```
@@ -61,8 +62,9 @@ By running this script you will get a ".new.top" file, which you should use as a
 
 `visualize_pef.py` You can look at the angle distributions and the PEFs in case of each residue.
 
-`format_scores_csrosetta` If you have already rescored the models (e.g. by running score_jd2 of Rosetta3) and 
-you have a score.cs file, you can call this script to format the model names and scores so "save_dihedrals.py" will be able to read them 
-and "fit_dihedrals.py" can use the Rosetta-score for weighting.
-
+`format_scores_csrosetta` If you e.g. run CS-Rosetta locally, and you have already rescored the models 
+(e.g. by running score_jd2 of Rosetta3) and you have a "score.cs" file, 
+you can call this script to format the model names and scores to generate "name.scores.txt".
+Later "save_dihedrals.py" can read "name.scores.txt" and "fit_dihedrals.py" can use the Rosetta-score for weighting. 
+The [CS-Rosetta server](https://csrosetta.bmrb.io/submit) generates this output automatically.
 
