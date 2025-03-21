@@ -72,5 +72,3 @@ By running this script you will get a ".new.top" file, which you should use as a
 you can call this script to format the model names and scores to generate "name.scores.txt".
 Later "save_dihedrals.py" can read "name.scores.txt" and "fit_dihedrals.py" can use the Rosetta-score for weighting. 
 The [CS-Rosetta server](https://csrosetta.bmrb.io/submit) generates this output automatically.
-
-`write_config` You can write a blank EDMD_config.json.
