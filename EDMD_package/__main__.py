@@ -6,13 +6,14 @@ to define Potential Energy Functions (PEFs) and dPEFs.
 import json
 import argparse
 import sys
+import os
 from pathlib import Path
 
 from .save_dihedrals import main as save_dihedrals_main
 from .visualize_dihedrals import main as visualize_dihedrals_main
-from .create_tables import main as create_tables_main
 from .fit_dihedrals import main as fit_dihedrals_main
 from .visualize_pef import main as visualize_pef_main
+from .create_tables import main as create_tables_main
 
 
 def load_config(config_path: Path):
@@ -23,6 +24,28 @@ def load_config(config_path: Path):
     return config
 
 
+def write_config():
+    """Write a blank EDMD_config.json file."""
+
+    new_text = "{\n" \
+               "  \"ROSETTA_RESULTS_FOLDER\": \"<path to the ExtractedPDBs folder, containing the CS-Rosetta structures>\",\n" \
+               "  \"GMX_FOLDER\": \"<path to the folder containing the GRO and FULL.TOP files for gromacs>\",\n" \
+               "  \"RESI_IDX_SHIFT\": 0,\n" \
+               "  \"VISUALIZE\": \"True\",\n" \
+               "  \"SCORE_SCALE\": 10.0,\n" \
+               "  \"TEMPERATURE\": 310.0,\n" \
+               "  \"GRO_FILENAME\": \"<GRO filename>\",\n" \
+               "  \"TOP_FILENAME\": \"<FULL.TOP filename>\"\n" \
+               "}"
+
+    current_dir = os.getcwd()
+
+    with open(Path(f"{current_dir}/EDMD_config.json"), "w") as f:
+        f.write(new_text)
+
+    print("EDMD_config.json was written.")
+
+
 def main():
 
     parser = argparse.ArgumentParser(
@@ -30,14 +53,27 @@ def main():
     )
     parser.add_argument(
         "-c", "--config", type=Path, default=Path("EDMD_config.json"),
-        help="A path pointing to an ebMD CONFIGURATION json file."
+        help="A path pointing to a config JSON file."
     )
     parser.add_argument(
         "-fn", "--function_name", type=str, default=None,
         help="The name of the individual script you want to call (e.g., save_dihedrals)."
     )
+    parser.add_argument(
+        "-w", "--write_config", action="store_true",
+        help="Write a blank config JSON file."
+    )
 
     args = parser.parse_args()
+
+    if args.write_config:
+        write_config()
+        sys.exit(0)
+
+    if not os.path.exists(args.config):
+        print("No EDMD_config.json was found.")
+        print("Use -w to write a blank config file or -c to specify an existing one.")
+        sys.exit(1)
 
     # Mapping function names to their respective functions
     function_map = {
@@ -45,7 +81,7 @@ def main():
         "fit_dihedrals": fit_dihedrals_main,
         "create_tables": create_tables_main,
         "visualize_dihedrals": visualize_dihedrals_main,
-        "visualize_pef": visualize_pef_main,
+        "visualize_pef": visualize_pef_main
     }
 
     if args.function_name:
