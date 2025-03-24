@@ -46,18 +46,17 @@ def main(config_path: Path):
     config = load_config(config_path)
 
     # Access global variables
-    extractedpdbs = Path(config.get("ExtractedPDBs_FOLDER"))
-    rosetta_results_folder = Path(extractedpdbs / "..")
+    extractedpdbs_folder = Path(config.get("ExtractedPDBs_FOLDER"))
     score_scale: float = config.get("SCORE_SCALE")
     temperature: float = config.get("TEMPERATURE")
 
     # Read in the Rosetta dihedral angles from the pickle, written in save_dihedrals.py
-    with open(rosetta_results_folder / f"angles_csr.pickle", "rb") as f:
+    with open(extractedpdbs_folder / "../angles_csr.pickle", "rb") as f:
         angle_data, _ = pickle.load(f)
 
     # Read in PEF data from a pickle, written in fit_dihedrals.py
     pickle_name = f"pef_dpef_data_scoreScale{score_scale:.0f}_{temperature}K"
-    with open(rosetta_results_folder / f"{pickle_name}.pickle", "rb") as f:
+    with open(extractedpdbs_folder / f"../{pickle_name}.pickle", "rb") as f:
         x_values: np.ndarray
         pef_dpef_data: Dict[str, Tuple[np.ndarray, np.ndarray]]
         x_values, pef_dpef_data = pickle.load(f)
@@ -69,9 +68,9 @@ def main(config_path: Path):
         legend_tag = ""
 
     # Create a folder for the figures, if it doesn't exist yet
-    out_folder = f"pef_figures_scoreScale{score_scale:.0f}_{temperature}K{legend_tag}{TAG}"
-    if not os.path.exists(rosetta_results_folder / out_folder):
-        os.mkdir(rosetta_results_folder / out_folder)
+    out_folder = f"../pef_figures_scoreScale{score_scale:.0f}_{temperature}K{legend_tag}{TAG}"
+    if not os.path.exists(extractedpdbs_folder / out_folder):
+        os.mkdir(extractedpdbs_folder / out_folder)
 
     # Set colors for later plotting
     pef_color = "red"
@@ -172,7 +171,7 @@ def main(config_path: Path):
             plt.subplots_adjust(wspace=0.5, hspace=0.2)
 
         # Save the figure
-        fig.savefig(rosetta_results_folder / f"{out_folder}/{resi_name}.png", dpi=300)
+        fig.savefig(extractedpdbs_folder / f"{out_folder}/{resi_name}.png", dpi=300)
 
         plt.close(fig)
 

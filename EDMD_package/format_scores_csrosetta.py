@@ -31,25 +31,25 @@ def main():
     config = load_config(args.config)
 
     # Access global variables
-    rosetta_results_folder = Path(f"{config.get("ExtractedPDBs_FOLDER")}/..")
+    extractedpdbs_folder = Path(config.get("ExtractedPDBs_FOLDER"))
 
     # Check if score.sc exists with the scores of the models
-    if not os.path.exists(rosetta_results_folder / "score.sc"):
-        sys.exit(f"There is no score.sc file in {rosetta_results_folder}. "
+    if not os.path.exists(extractedpdbs_folder / "../score.sc"):
+        sys.exit(f"There is no score.sc file in {extractedpdbs_folder / ".."}. "
                  f"Run e.g. <path of Rosetta3 folder>/main/source/bin/score_jd2.linuxgccrelease "
                  f"-in:file:silent decoys.out")
 
     # Check if the folder with the pdb files exists
-    if not os.path.exists(rosetta_results_folder / "ExtractedPDBs"):
-        sys.exit(f"There is no ExtractedPDBs directory in {rosetta_results_folder}")
+    if not os.path.exists(extractedpdbs_folder):
+        sys.exit(f"There is no {extractedpdbs_folder}")
 
     out_filename = "name.scores.txt"
 
-    if os.path.exists(rosetta_results_folder / f"ExtractedPDBs/{out_filename}"):
-        print(f"{rosetta_results_folder}/ExtractedPDBs/{out_filename} already exists")
+    if os.path.exists(extractedpdbs_folder / f"{out_filename}"):
+        print(f"{extractedpdbs_folder}/{out_filename} already exists")
         return
 
-    with open(rosetta_results_folder / "score.sc", "r") as f:
+    with open(extractedpdbs_folder / "../score.sc", "r") as f:
         score_data = f.read()
 
     # Format the score.sc file
@@ -69,7 +69,7 @@ def main():
 
         new_score_data += f"{line[-1]} {line[1]}\n"
 
-    with open(rosetta_results_folder / f"ExtractedPDBs/{out_filename}", "w") as f:
+    with open(extractedpdbs_folder / f"{out_filename}", "w") as f:
         f.write(new_score_data)
 
 
