@@ -31,7 +31,7 @@ def main():
     config = load_config(args.config)
 
     # Access global variables
-    rosetta_results_folder = Path(config.get("ROSETTA_RESULTS_FOLDER"))
+    rosetta_results_folder = Path(f"{config.get("ExtractedPDBs_FOLDER")}/..")
 
     # Check if score.sc exists with the scores of the models
     if not os.path.exists(rosetta_results_folder / "score.sc"):

@@ -26,7 +26,7 @@ python3 -m pip install EDMD_package
 ```
 
 ## EDMD_config.json file
-- `ROSETTA_RESULTS_FOLDER: str` Path of the directory containing the ExtractedPDBs folder with the individual PDB files of the ensemble and a "name.scores.txt" containing model names and Rosetta-scores.
+- `ExtractedPDBs_FOLDER: str` Path of the "ExtractedPDBs" folder with the individual PDB files of the ensemble and a "name.scores.txt" containing model names and Rosetta-scores.
 
 - `GMX_FOLDER: str` Path of the folder, where you have your GRO and processed TOP files.
 
@@ -67,7 +67,7 @@ By running this script you will get a ".new.top" file, which you should use as a
 
 `visualize_pef.py` You can look at the angle distributions and the PEFs in case of each residue.
 
-`format_scores_csrosetta` If you e.g. run CS-Rosetta locally, and you have already rescored the models 
+`format_scores_csrosetta` If you e.g. run CS-Rosetta locally, and the models are already rescored
 (e.g. by running score_jd2 of Rosetta3) and you have a "score.cs" file, 
 you can call this script to format the model names and scores to generate "name.scores.txt".
 Later "save_dihedrals.py" can read "name.scores.txt" and "fit_dihedrals.py" can use the Rosetta-score for weighting. 

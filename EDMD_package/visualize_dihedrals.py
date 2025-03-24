@@ -52,7 +52,8 @@ def main(config_path: Path):
     config = load_config(config_path)
 
     # Access global variables
-    rosetta_results_folder = Path(config.get("ROSETTA_RESULTS_FOLDER"))
+    extractedpdbs = Path(config.get("ExtractedPDBs_FOLDER"))
+    rosetta_results_folder = Path(extractedpdbs / "..")
 
     # Read in the Rosetta dihedral angles from the pickle, written in save_dihedrals.py
     with open(rosetta_results_folder / f"angles_csr.pickle", "rb") as f:

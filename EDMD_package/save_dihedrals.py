@@ -89,7 +89,8 @@ def main(config_path: Path):
     config = load_config(config_path)
 
     # Access global variables
-    rosetta_results_folder = Path(config.get("ROSETTA_RESULTS_FOLDER"))
+    extractedpdbs = Path(config.get("ExtractedPDBs_FOLDER"))
+    rosetta_results_folder = Path(extractedpdbs / "..")
     resi_idx_shift: int = config.get("RESI_IDX_SHIFT")
 
     # Read filenames and Rosetta scores

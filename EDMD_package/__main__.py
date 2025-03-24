@@ -28,7 +28,7 @@ def write_config():
     """Write a blank EDMD_config.json file."""
 
     new_text = "{\n" \
-               "  \"ROSETTA_RESULTS_FOLDER\": \"<path to the ExtractedPDBs folder, containing the CS-Rosetta structures>\",\n" \
+               "  \"ExtractedPDBs_FOLDER\": \"<path to the ExtractedPDBs folder, containing the CS-Rosetta structures>\",\n" \
                "  \"GMX_FOLDER\": \"<path to the folder containing the GRO and FULL.TOP files for gromacs>\",\n" \
                "  \"RESI_IDX_SHIFT\": 0,\n" \
                "  \"VISUALIZE\": \"True\",\n" \

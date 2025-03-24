@@ -1,5 +1,5 @@
 {
-  "ROSETTA_RESULTS_FOLDER": "/rhome/PROTMOD/gadaneczm/Rosetta/run_abrelax/fbp/run/analysis",
+  "ExtractedPDBs_FOLDER": "/rhome/PROTMOD/gadaneczm/Rosetta/run_abrelax/fbp/run/analysis/ExtractedPDBs",
   "GMX_FOLDER": "/rhome/PROTMOD/gadaneczm/ebMD_processing/data/fbp/fbp-fmn_abrelax",
   "RESI_IDX_SHIFT": 0,
   "VISUALIZE": "True",
