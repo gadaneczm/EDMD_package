@@ -102,12 +102,12 @@ def main(config_path: Path):
     config = load_config(config_path)
 
     # Access global variables
-    extractedpdbs_folder = Path(config.get("ExtractedPDBs_FOLDER"))
+    extractedpdbs_path = Path(config.get("ExtractedPDBs_FOLDER"))
     score_scale: float = config.get("SCORE_SCALE")
     temperature: float = config.get("TEMPERATURE")
 
     # Read in the dihedral data from a pickle
-    with open(extractedpdbs_folder / f"../angles_csr.pickle", "rb") as f:
+    with open(extractedpdbs_path.parent / "angles_csr.pickle", "rb") as f:
         data: Dict[str, np.ndarray]
         scores: np.ndarray
         data, scores = pickle.load(f)
@@ -157,5 +157,5 @@ def main(config_path: Path):
 
     # Save the PEF and dPEF data in a pickle
     pickle_name = f"pef_dpef_data_scoreScale{score_scale:.0f}_{temperature}K"
-    with open(extractedpdbs_folder / f"../{pickle_name}.pickle", "wb") as f:
+    with open(extractedpdbs_path.parent / f"{pickle_name}.pickle", "wb") as f:
         pickle.dump(fit_data, f)

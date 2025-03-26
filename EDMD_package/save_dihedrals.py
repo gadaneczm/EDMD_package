@@ -89,11 +89,11 @@ def main(config_path: Path):
     config = load_config(config_path)
 
     # Access global variables
-    extractedpdbs_folder = Path(config.get("ExtractedPDBs_FOLDER"))
+    extractedpdbs_path = Path(config.get("ExtractedPDBs_FOLDER"))
     resi_idx_shift: int = config.get("RESI_IDX_SHIFT")
 
     # Read filenames and Rosetta scores
-    file_names, scores = get_filenames(extractedpdbs_folder)
+    file_names, scores = get_filenames(extractedpdbs_path)
 
     scores = np.array(scores)
     angles_dict = dict()
@@ -104,7 +104,7 @@ def main(config_path: Path):
 
         # Read in the model (1st model, chain A) from a pdb file
         kras: Chain = PDBParser(QUIET=True).get_structure("kras",
-                                                          str(extractedpdbs_folder / file_name))[0]["A"]
+                                                          str(extractedpdbs_path / file_name))[0]["A"]
 
         # Iterate through the residues and measuring the dihedral angles
         for resi_idx in range(1, len(kras) - 1):
@@ -145,5 +145,5 @@ def main(config_path: Path):
     # Write the results to a pickle for later usage
     angles_dict = {key: np.array(value) for key, value in angles_dict.items()}
 
-    with open(extractedpdbs_folder / "../angles_csr.pickle", "wb") as f:
+    with open(extractedpdbs_path.parent / "angles_csr.pickle", "wb") as f:
         pickle.dump((angles_dict, scores), f)

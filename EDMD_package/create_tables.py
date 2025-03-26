@@ -160,19 +160,22 @@ def main(config_path: Path):
     config = load_config(config_path)
 
     # Access global variables
-    extractedpdbs_folder = Path(config.get("ExtractedPDBs_FOLDER"))
-    gmx_folder = Path(config.get("GMX_FOLDER"))
+    extractedpdbs_path = Path(config.get("ExtractedPDBs_FOLDER"))
+    gmx_folder_path = Path(config.get("GMX_FOLDER"))
     score_scale: float = config.get("SCORE_SCALE")
-    top_filename: str = config.get("TOP_FILENAME")
     gro_filename: str = config.get("GRO_FILENAME")
+    top_filename: str = config.get("PROCESSED_TOP_FILENAME")
     temperature: float = config.get("TEMPERATURE")
+
+    gro_path = Path(gmx_folder_path / gro_filename)
+    top_path = Path(gmx_folder_path / top_filename)
 
     # Import PEFs from pickle, written by fit_dihedrals.py
     x_values: np.ndarray
     pef_dpef_data: Dict[str, Tuple[np.ndarray, np.ndarray]]
 
     pickle_name = f"pef_dpef_data_scoreScale{score_scale:.0f}_{temperature}K"
-    with open(extractedpdbs_folder / f"../{pickle_name}.pickle", "rb") as f:
+    with open(extractedpdbs_path.parent / f"{pickle_name}.pickle", "rb") as f:
         x_values, pef_dpef_data = pickle.load(f)
 
     # Collect the amino acid sequence
@@ -180,24 +183,25 @@ def main(config_path: Path):
     keys.sort(key=lambda x: int(x.split("-")[0]))
 
     # Verify if the GRO and TOP files exist
-    if not os.path.exists(gmx_folder / gro_filename):
+    if not os.path.exists(gro_path):
         sys.exit(f"There is no GRO file in the GMX_FOLDER")
-    if not os.path.exists(gmx_folder / top_filename):
+    if not os.path.exists(top_path):
         sys.exit(f"There is no TOP file in the GMX_FOLDER")
 
     # Parse the GRO file to collect dihedral IDs and atom indexes for each Phi/Psi in the sequence
-    resi_to_ids = parse_gro(gmx_folder / gro_filename, keys)
+    resi_to_ids = parse_gro(gro_path, keys)
 
     # Read the TOP file and collect the atom index pairs and row indexes for each dihedral angles
-    top_data, dih_ids_to_row_idxs = parse_top(gmx_folder / top_filename)
+    top_data, dih_ids_to_row_idxs = parse_top(top_path)
 
     # Create the necessary dictionaries
-    if not os.path.exists(gmx_folder / "for_gmx"):
-        os.mkdir(gmx_folder / "for_gmx")
+    for_gmx_path = gmx_folder_path / "for_gmx"
+    if not os.path.exists(for_gmx_path):
+        os.mkdir(for_gmx_path)
 
-    out_folder = f"for_gmx/tables_of_potentials"
-    if not os.path.exists(gmx_folder / out_folder):
-        os.mkdir(gmx_folder / out_folder)
+    out_folder_path = Path(for_gmx_path / "tables_of_potentials")
+    if not os.path.exists(out_folder_path):
+        os.mkdir(out_folder_path)
 
     print("Writing tables...")
 
@@ -222,7 +226,7 @@ def main(config_path: Path):
 
         pef_dpef_table = get_xvg(x_values, *pef_dpef_data[angle_name])
 
-        with open(gmx_folder / f"{out_folder}/table_d{table_idx}.xvg", "w") as f:
+        with open(out_folder_path / f"table_d{table_idx}.xvg", "w") as f:
             f.write(pef_dpef_table)
 
         print("\r", end="")
@@ -233,11 +237,11 @@ def main(config_path: Path):
     # Create a NEW.TOP file
     top_data = "\n".join(top_data)
 
-    new_top_filename = f"{top_filename[:-9]}.new.top"
-    with open(gmx_folder / f"for_gmx/{new_top_filename}", "w") as f:
+    new_top_path = Path(f"{for_gmx_path}/{top_path.stem}_new.top")
+    with open(new_top_path, "w") as f:
         f.write(top_data)
 
     # Copy the necessary files to a "for_gmx" folder
-    shutil.copy(gmx_folder / gro_filename, gmx_folder / "for_gmx" / gro_filename)
-    shutil.copy(gmx_folder / f"{config_path}",
-                gmx_folder / f"{out_folder}/EDMD_config.py")
+    shutil.copy(gro_path, for_gmx_path / gro_filename)
+    shutil.copy(gmx_folder_path / f"{config_path}",
+                out_folder_path / "EDMD_config.py")

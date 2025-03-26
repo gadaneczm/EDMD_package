@@ -40,7 +40,7 @@ python3 -m pip install EDMD_package
 
 - `GRO_FILENAME: str` Name of your GRO file ("e.g. protein.gro"), which is ready for the simulation, so is solvated, etc.
 
-- `TOP_FILENAME: str` Name of you processed TOP file (e.g. "protein.full.top"), 
+- `PROCESSED_TOP_FILENAME: str` Name of you processed TOP file (e.g. "protein_processed.top"), 
 created e.g. by `gmx grompp -pp` flag in gromacs.
 
 ## How to use?

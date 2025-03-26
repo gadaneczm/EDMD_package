@@ -52,10 +52,10 @@ def main(config_path: Path):
     config = load_config(config_path)
 
     # Access global variables
-    extractedpdbs_folder = Path(config.get("ExtractedPDBs_FOLDER"))
+    extractedpdbs_path = Path(config.get("ExtractedPDBs_FOLDER"))
 
     # Read in the Rosetta dihedral angles from the pickle, written in save_dihedrals.py
-    with open(extractedpdbs_folder / "../angles_csr.pickle", "rb") as f:
+    with open(extractedpdbs_path.parent / "angles_csr.pickle", "rb") as f:
         data: Dict[str, np.ndarray]
         data, _ = pickle.load(f)
 
@@ -73,8 +73,8 @@ def main(config_path: Path):
     keys.sort(key=lambda x: int(x.split("-")[0]))
 
     # Create a folder for the figures, if it doesn't exist yet
-    if not os.path.exists(extractedpdbs_folder / "../angle_figures_csr"):
-        os.mkdir(extractedpdbs_folder / "../angle_figures_csr")
+    if not os.path.exists(extractedpdbs_path.parent / "angle_figures_csr"):
+        os.mkdir(extractedpdbs_path.parent / "angle_figures_csr")
 
     print("Saving figures...")
 
@@ -118,7 +118,7 @@ def main(config_path: Path):
         ax[1].set_yticks(ax[1].get_yticks(), labels=["" for _ in ax[1].get_yticks()])
 
         # Save the figure
-        fig.savefig(extractedpdbs_folder / f"../angle_figures_csr/{resi_name}.png", dpi=300)
+        fig.savefig(extractedpdbs_path.parent / f"angle_figures_csr/{resi_name}.png", dpi=300)
 
         print("\r", end="")
         print(progress_bar((counter+1) / len(keys), 30), end=", ")

@@ -14,6 +14,7 @@ from .visualize_dihedrals import main as visualize_dihedrals_main
 from .fit_dihedrals import main as fit_dihedrals_main
 from .visualize_pef import main as visualize_pef_main
 from .create_tables import main as create_tables_main
+from .format_scores_csrosetta import main as format_scores_main
 
 
 def load_config(config_path: Path):
@@ -27,21 +28,21 @@ def load_config(config_path: Path):
 def write_config():
     """Write a blank EDMD_config.json file."""
 
-    new_text = "{\n" \
-               "  \"ExtractedPDBs_FOLDER\": \"<path to the ExtractedPDBs folder, containing the CS-Rosetta structures>\",\n" \
-               "  \"GMX_FOLDER\": \"<path to the folder containing the GRO and FULL.TOP files for gromacs>\",\n" \
-               "  \"RESI_IDX_SHIFT\": 0,\n" \
-               "  \"VISUALIZE\": \"True\",\n" \
-               "  \"SCORE_SCALE\": 10.0,\n" \
-               "  \"TEMPERATURE\": 310.0,\n" \
-               "  \"GRO_FILENAME\": \"<GRO filename>\",\n" \
-               "  \"TOP_FILENAME\": \"<FULL.TOP filename>\"\n" \
-               "}"
+    new_json = {
+        "ExtractedPDBs_FOLDER": "<path to the ExtractedPDBs folder, containing the CS-Rosetta structures>",
+        "GMX_FOLDER": "<path to the folder containing the GRO and the processed TOP files for gromacs>",
+        "RESI_IDX_SHIFT": 0,
+        "VISUALIZE": True,
+        "SCORE_SCALE": 10,
+        "TEMPERATURE": 310,
+        "GRO_FILENAME": "<GRO filename>",
+        "PROCESSED_TOP_FILENAME": "<processed TOP filename>"
+    }
 
     current_dir = os.getcwd()
 
     with open(Path(f"{current_dir}/EDMD_config.json"), "w") as f:
-        f.write(new_text)
+        json.dump(new_json, f)
 
     print("EDMD_config.json was written.")
 
@@ -81,7 +82,8 @@ def main():
         "fit_dihedrals": fit_dihedrals_main,
         "create_tables": create_tables_main,
         "visualize_dihedrals": visualize_dihedrals_main,
-        "visualize_pef": visualize_pef_main
+        "visualize_pef": visualize_pef_main,
+        "format_scores": format_scores_main
     }
 
     if args.function_name:
