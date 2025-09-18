@@ -3,7 +3,9 @@ This module can be used to analyse the Phi and Psi dihedral (or torsion) angle d
 in a protein structural ensemble (e.g., from Chemical-Shift-Rosetta), define potential energy functions (PEFs), 
 and replace the original dihedral energy terms in GROMACS for molecular dynamics (MD) simulations.
 
-1. Set up the system for the MD simulation from the very best structure in the ensemble. 
+0. You need an ensemble of individual PDB files from CS-Rosetta stored in a directory e.g. "ExtractedPDBs".
+
+1. Set up the system for the MD simulation from the very best structure in the ensemble. This will be your e.g. "protein.gro" file.
 
 2. Set your configuration in the "EDMD_config.json" file.
 
