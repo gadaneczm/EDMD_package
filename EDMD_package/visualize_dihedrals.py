@@ -122,5 +122,5 @@ def main(config_path: Path):
 
         print("\r", end="")
         print(progress_bar((counter+1) / len(keys), 30), end=", ")
-        print(f"Figure: {resi_name} done...", end="")
+        print(f"Figure for {resi_name} is done...", end="")
     print()

@@ -139,7 +139,7 @@ def main(config_path: Path):
 
         print("\r", end="")
         print(progress_bar((file_idx+1) / len(file_names), 30), end=", ")
-        print(f"Filename {file_name} done...", end="")
+        print(f"Filename {file_name} is done...", end="")
     print()
 
     # Write the results to a pickle for later usage

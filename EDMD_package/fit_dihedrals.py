@@ -152,7 +152,7 @@ def main(config_path: Path):
 
         print("\r", end="")
         print(progress_bar((counter+1) / len(keys), 30), end=", ")
-        print(f"{resi_name} is done...", end="")
+        print(f"Dihedral {resi_name} is done...", end="")
     print()
 
     # Save the PEF and dPEF data in a pickle

@@ -231,7 +231,7 @@ def main(config_path: Path):
 
         print("\r", end="")
         print(progress_bar((table_idx+1) / len(resi_to_ids), 30), end=", ")
-        print(f"Filename {angle_name} done...", end="")
+        print(f"Table for {angle_name} is done...", end="")
     print()
 
     # Create a NEW.TOP file
