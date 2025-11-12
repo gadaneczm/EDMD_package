@@ -11,10 +11,10 @@ SOURCES = [
     f"/rhome/PROTMOD/gadaneczm/EDMD_processing/results_gmx_runs/fbp-fmn/csrr1_fbp-fmn_opc_fforig_310K_1/{JSON}",
     f"/rhome/PROTMOD/gadaneczm/EDMD_processing/results_gmx_runs/fbp-fmn/csrr1_fbp-fmn_opc_fforig_310K_2/{JSON}"
     ]
-LABELS = ["EDMD_1", "EDMD_2", "MD_1", "MD_2"]
+LABELS = ["EDMD-1", "EDMD-2", "MD-1", "MD-2"]
 COLORS = ["deepskyblue", "royalblue", "limegreen", "green"]
 ATOMS = ["M51", "FMN123", "FMN123"]
-DATA_IDX = 2
+DATA_IDX = 0
 
 def main():
 
@@ -29,13 +29,13 @@ def main():
 
         ax.plot(times, [score[DATA_IDX] for score in scores], color=COLORS[idx], label=LABELS[idx])
 
-    file_name = f"LoCoHD_csrr-FBP_EDMD_{ATOMS[DATA_IDX]}-{ref_anchors[DATA_IDX][0]}"
+    file_name = f"LoCoHD_csrr-FBP_EDMD_{ATOMS[DATA_IDX]}-{ref_anchors[DATA_IDX][0]}_v2"
 
-    ax.legend(loc="upper left", fontsize=14)
+    ax.legend(loc="upper left", fontsize=18)
 
-    ax.set_ylim(0, 0.4)
+    ax.set_ylim(0, 0.12)
 
-    ax.tick_params(axis='both', labelsize=12)
+    ax.tick_params(axis='both', labelsize=16)
 
     plt.tight_layout()
 
