@@ -79,3 +79,7 @@ By running this script you will get a "_processed_new.top" file, which you shoul
 you can call this script to format the model names and scores to generate "name.scores.txt".
 Later "save_dihedrals.py" can read "name.scores.txt" and "fit_dihedrals.py" can use the Rosetta-score for weighting. 
 The [CS-Rosetta server](https://csrosetta.bmrb.io/submit) generates this output automatically.
+
+
+## Publication
+[Improving Protein Structure Determination by Integrating Ensemble-Driven Molecular Dynamics with Chemical Shift-Based Restraints](https://doi.org/10.1021/acs.jcim.5c02358)
