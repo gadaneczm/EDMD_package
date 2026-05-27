@@ -2,7 +2,8 @@ from pathlib import Path
 import re
 
 FOLDER = Path("/rhome/PROTMOD/gadaneczm/Poky/Lists/")
-PATTERN = re.compile(r"^kras-.*uv\.list$")
+PATTERN = re.compile(r"^kras-wt.*VW_uv\.list$")
+SEQ_LEN = 169
 
 def main():
     for file_path in FOLDER.iterdir():
@@ -16,7 +17,7 @@ def main():
 
                 last_resi = data[-2][0]
                 last_resi_nb = int(last_resi[1:-3])
-                correction = 169 - last_resi_nb
+                correction = SEQ_LEN - last_resi_nb
 
                 resi_counter = 0
 

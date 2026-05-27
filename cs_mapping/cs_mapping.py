@@ -5,8 +5,8 @@ import statistics
 import matplotlib.pyplot as plt
 
 MUTANT = "g12d"
-FOLDER = Path("/rhome/PROTMOD/gadaneczm/Poky/Lists/")
-PATTERN = f"kras-{MUTANT}_ph-*uv.new.list"
+FOLDER = Path("/rhome/PROTMOD/gadaneczm/kras_foldamers/kras-g12d_ph-foldamers_2022/")
+PATTERN = f"kras-{MUTANT}_ph-*20220117.new.list"
 
 
 def read_data(file_path: Path) -> (List[float], List[float], List[float]):
@@ -84,7 +84,7 @@ def get_figures(csp_list: List[float], height_red_list: List[float], file_path: 
 
 
     name = file_path.name.split(".")[0]
-    new_path = file_path.parent / "csm_foldamers" / name
+    new_path = file_path.parent / "results" / name
 
     fig.suptitle(f"{name}")
 
@@ -99,11 +99,13 @@ def get_figures(csp_list: List[float], height_red_list: List[float], file_path: 
 
 def main():
 
-    ref_file = FOLDER / f"kras-{MUTANT}_ref_uv.new.list"
+    ref_file = FOLDER / f"kras-{MUTANT}_ref_uv_20220117.new.list"
 
     ref_resi_list, ref_n_list, ref_h_list, ref_height_list = read_data(ref_file)
 
     results_txt = ""
+    csp_csv = ""
+    height_csv = ""
 
     for file_path in FOLDER.glob(PATTERN):
         print(f"Matched: {file_path.name}")
@@ -113,13 +115,23 @@ def main():
         csp_list, height_red_list = [], []
 
         results_txt += f"\n{file_path.name}\n"
+        csp_csv += f"\n{file_path.name}"
+        height_csv += f"\n{file_path.name}"
 
         for (ref_n, ref_h, ref_height, ph_n, ph_h, ph_height) in zip(ref_n_list, ref_h_list, ref_height_list,
                                                              ph_n_list, ph_h_list, ph_height_list):
 
-            csp_list.append(get_csp(ref_n, ref_h, ph_n, ph_h))
+            csp = get_csp(ref_n, ref_h, ph_n, ph_h)
 
-            height_red_list.append(get_height_reduction(ref_height, ph_height))
+            csp_list.append(csp)
+
+            csp_csv += f",{csp}"
+
+            height = get_height_reduction(ref_height, ph_height)
+
+            height_red_list.append(height)
+
+            height_csv += f",{height}"
 
         csp_std = statistics.stdev(csp_list)
 
@@ -148,8 +160,14 @@ def main():
 
         get_figures(csp_list, height_red_list, file_path)
 
-    with open(FOLDER / "csm_foldamers" / f"kras-{MUTANT}_results" , "w") as f:
+    with open(FOLDER / "results" / f"kras-{MUTANT}_results.txt" , "w") as f:
         f.write(results_txt)
+
+    with open(FOLDER / "results" / f"kras-{MUTANT}_csp_20220117.csv" , "w") as f:
+        f.write(csp_csv)
+
+    with open(FOLDER / "results" / f"kras-{MUTANT}_height_20220117.csv" , "w") as f:
+        f.write(height_csv)
 
 
 if __name__ == "__main__":
